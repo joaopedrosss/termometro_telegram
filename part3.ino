@@ -4,8 +4,8 @@
 #include <LiquidCrystal_I2C.h>
 
 CTBot myBot;
-String ssid  = "NOME_DA_REDE_WIFI";
-String pass  = "SENHA_WIFI";
+String ssid  = "ondas";
+String pass  = "12345678";
 String token = "5057650735:AAHJrq_3x9jXQhxjN9T2xrEmHJIlpSaWnAY"; 
 
 int ktcSO = 12; //  GPIO12
