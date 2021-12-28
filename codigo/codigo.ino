@@ -13,7 +13,10 @@ Brazil - 2021
 CTBot myBot;
 String ssid  = "ondas";
 String pass  = "12345678";
+<<<<<<< HEAD:codigo/codigo.ino
 String token = "";  //ID DO BOT
+=======
+String token = ""; 
 
 int ktcSO = 12; //  GPIO12
 int ktcCS = 13; // GPIO13
