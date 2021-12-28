@@ -1,28 +1,31 @@
-#include "CTBot.h"
-#include "max6675.h" 
-#include <Wire.h>  
-#include <LiquidCrystal_I2C.h>
+/*
+Termostato de Celcius
+Author:
+João
+Brazil - 2021 
+*/
+
+#include "CTBot.h"//robo
+#include "max6675.h" //sensor
+#include <Wire.h>  //interface i2c
+#include <LiquidCrystal_I2C.h>//lcd
 
 CTBot myBot;
-String ssid  = "NOME_DA_REDE_WIFI";
-String pass  = "SENHA_WIFI";
-String token = "5057650735:AAHJrq_3x9jXQhxjN9T2xrEmHJIlpSaWnAY"; 
+String ssid  = "ondas";
+String pass  = "12345678";
+String token = "";  //ID DO BOT
 
 int ktcSO = 12; //  GPIO12
 int ktcCS = 13; // GPIO13
 int ktcCLK = 14; // GPIO14
 MAX6675 ktc(ktcCLK, ktcCS, ktcSO); 
 
-LiquidCrystal_I2C lcd(0x3F, 16, 2); //definir o endereço do periferico
+LiquidCrystal_I2C lcd(0x27, 16, 2); //definir o endereço do periferico
   
 void setup(){
   lcd.init();
   lcd.backlight();
-  lcd.setCursor(0, 0);
-  lcd.print("Temperatura:");
-  lcd.setCursor(6, 1);
-  lcd.print("*C");
-  lcd.setCursor(0, 1);
+  
 
   Serial.begin(115200); 
    
@@ -44,11 +47,18 @@ void setup(){
 void loop(){
   TBMessage msg; //armazena a mensagem recebida
 
-  Serial.print("Temperatura: "); 
+  lcd.setCursor(0, 0);
+  lcd.print("Temperatura:");
+  lcd.setCursor(6, 1);
+  lcd.print("*C");
+  lcd.setCursor(0, 1);
+  float cels = ktc.readCelsius();
+
+
+  Serial.println("Temperatura: "); 
   Serial.print(ktc.readCelsius()); 
   Serial.println("*C");
 
-  float cels = ktc.readCelsius();
   lcd.print(cels);
 
   String medida = "";
@@ -59,7 +69,7 @@ void loop(){
       myBot.sendMessage(msg.sender.id, medida );
     } else{
       String ola;
-      ola = (String)"Ola, " + msg.sender.username + (String)"! Meu nome é Celcius. Peça-me com 'Temperatura,Celcius' e lhe direi a temperatura. ";
+      ola = (String)"Ola," + msg.sender.username + (String)"! Meu nome é Celcius. Peça-me com 'Temperatura,Celcius' e lhe direi a temperatura. ";
       myBot.sendMessage(msg.sender.id, ola);
     }
   }
