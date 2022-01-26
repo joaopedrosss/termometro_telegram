@@ -4,7 +4,7 @@
 
 - Um sensor de temperatura com intergração com um BOT no telegram.
 
-#Equipamento Usado
+# Equipamento Usado
 
 - Microcontrolador **ESP8266**
 - Sensor de Temperatura **MAX6675**
