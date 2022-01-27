@@ -1,4 +1,4 @@
-# Termostato Com Telegram
+# Termômetro Com Telegram
 
 # O que é
 
